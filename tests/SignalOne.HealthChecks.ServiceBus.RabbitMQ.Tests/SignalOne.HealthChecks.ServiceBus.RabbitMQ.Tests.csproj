@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- This has to be here because importing from targets doesn't work yet -->
+    <DotNetCliToolReference Include="dotnet-reportgenerator-cli" Version="4.0.0-rc4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\SignalOne.HealthChecks.ServiceBus.RabbitMQ\SignalOne.HealthChecks.ServiceBus.RabbitMQ.csproj" />
+  </ItemGroup>
+</Project>

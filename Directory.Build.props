@@ -1,0 +1,19 @@
+<Project>
+  <PropertyGroup>
+
+    <!-- Package Information -->
+    <Authors>Im5tu</Authors>
+    <Product>SignalOne.HealthChecks</Product>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
+    <RepositoryUrl>https://github.com/SignalOneLtd/HealthChecks.ServiceBus</RepositoryUrl>
+
+    <!-- Build Settings -->
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <Deterministic>true</Deterministic>
+    <LangVersion>latest</LangVersion>
+
+    <!-- Package Versions -->
+    <AspNetCorePackageVersion>2.2.0-preview3-*</AspNetCorePackageVersion>
+  </PropertyGroup>
+</Project>

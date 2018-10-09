@@ -1,0 +1,16 @@
+<Project>
+	<Import Project="..\Directory.Build.props" Condition="Exists('..\Directory.Build.props')" />
+
+  <PropertyGroup>
+    <!-- Package Settings -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IsPackable Condition="$(Configuration) == 'Release'" >true</IsPackable>
+    <GeneratePackageOnBuild Condition="$(IsPackable) == 'true' AND $(CollectCoverage) == 'false'">true</GeneratePackageOnBuild>
+    
+    <!-- Debug Settings -->
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType Condition="$(CollectCoverage) == 'false'">embedded</DebugType>
+    
+    <!-- TODO :: GitVersioning -->
+  </PropertyGroup>
+</Project>

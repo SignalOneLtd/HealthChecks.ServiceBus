@@ -1,0 +1,17 @@
+<Project>
+  <Import Project="..\Directory.Build.props" Condition="Exists('..\Directory.Build.props')" />
+
+  <ItemGroup>
+    <Compile Remove="TestResults\**" />
+    <EmbeddedResource Remove="TestResults\**" />
+    <None Remove="TestResults\**" />
+  </ItemGroup>
+  
+  <PropertyGroup Condition="$(Configuration) == 'Release'">
+    <CollectCoverage>true</CollectCoverage>
+    <CoverletOutputFormat>opencover</CoverletOutputFormat> <!-- switch back to cobertura later -->
+    <CoverletOutput>TestResults\Coverage\</CoverletOutput>
+    <!-- Coverlet needs full debug symbols -->
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+</Project>

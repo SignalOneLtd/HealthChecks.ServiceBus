@@ -1,0 +1,8 @@
+<Project>
+	<Import Project="..\Directory.Build.targets" Condition="Exists('..\Directory.Build.targets')" />
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="$(AspNetCorePackageVersion)" />
+  </ItemGroup>
+  
+</Project>
