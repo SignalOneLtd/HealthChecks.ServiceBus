@@ -1,24 +1,36 @@
-﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
+﻿using Microsoft.Azure.Management.ServiceBus.Fluent;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using SignalOne.HealthChecks.ServiceBus.Azure.Configuration;
+using SignalOne.HealthChecks.ServiceBus.Azure.Management;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace SignalOne.HealthChecks.ServiceBus.Azure.Checks
 {
-    internal sealed class TopicHealthCheck : HealthCheckBase
+    internal sealed class TopicHealthCheck : HealthCheckBase<TopicHealthCheckOptions>
     {
-        private readonly IOptionsSnapshot<TopicHealthCheckOptions> _optionsSnapshot;
-
-        public TopicHealthCheck(IOptionsSnapshot<TopicHealthCheckOptions> optionsSnapshot)
+        public TopicHealthCheck(IOptionsSnapshot<TopicHealthCheckOptions> optionsSnapshot, IServiceBusManagementClientFactory managementClientFactory)
+            : base(optionsSnapshot, managementClientFactory)
         {
-            _optionsSnapshot = optionsSnapshot ?? throw new ArgumentNullException(nameof(optionsSnapshot));
         }
 
-        protected override Task<HealthCheckResult> ExecuteHealthCheckAsync(HealthCheckContext context, CancellationToken cancellationToken)
+        protected override async Task<HealthCheckResult> ExecuteHealthCheckAsync(HealthCheckContext context, TopicHealthCheckOptions options, IServiceBusManagementClient managementClient, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var queue = await managementClient.Topics.GetAsync("", "", options.TopicName, cancellationToken); // TODO :: expose first two properties
+
+                // TODO :: validate additional configuration
+
+                return HealthCheckResult.Passed("");
+            }
+            catch (Exception ex)
+            {
+                // TODO :: exception handling
+                return HealthCheckResult.Failed("", ex);
+            }
         }
     }
 }
