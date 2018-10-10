@@ -10,29 +10,29 @@ namespace Microsoft.Extensions.DependencyInjection
     public static class HealthCheckBuilderExtensions
     {
         /// <summary>
-        /// Configures the default namespace for all of the service bus checks
+        /// Configures the default options when they are not supplied during the setup of each health check.
         /// </summary>
-        /// <param name="builder">The ASP.Net Core health check builder</param>
-        /// <param name="baseUri">The connection string for the namespace to use as the default</param>
-        public static IHealthChecksBuilder AddAzureServiceBusDefaultUri(this IHealthChecksBuilder builder, string baseUri)
+        /// <param name="builder">The ASP.Net Core health check builder.</param>
+        /// <param name="defaultSetup">The action which sets up the default options.</param>
+        public static IHealthChecksBuilder AddAzureServiceBusDefaults(this IHealthChecksBuilder builder, Action<HealthCheckOptions> defaultSetup)
         {
             if (builder == null)
                 throw new ArgumentNullException(nameof(builder));
 
-            if (string.IsNullOrWhiteSpace(baseUri))
-                throw new ArgumentNullException(nameof(baseUri));
+            if (defaultSetup == null)
+                throw new ArgumentNullException(nameof(defaultSetup));
 
-            builder.Services.Configure<HealthCheckOptions>(options => options.BaseUri = new Uri(baseUri));
+            builder.Services.Configure(defaultSetup);
 
             return builder;
         }
 
         /// <summary>
-        /// Adds a check to see whether the queue exists in the specified namespace
+        /// Adds a health check to see whether the specified queue exists, and optionally, checking configuration details.
         /// </summary>
-        /// <param name="builder">The ASP.Net Core health check builder</param>
-        /// <param name="queueName">The queue to be checked</param>
-        /// <param name="requiredConfiguration">Options to fail the check</param>
+        /// <param name="builder">The ASP.Net Core health check builder.</param>
+        /// <param name="queueName">The queue to be checked.</param>
+        /// <param name="requiredConfiguration">Setup for the options specific to this queue.</param>
         public static IHealthChecksBuilder AddAzureServiceBusQueueCheck(this IHealthChecksBuilder builder, string queueName, Action<QueueHealthCheckOptions> requiredConfiguration = null)
         {
             if (builder == null)
@@ -51,11 +51,11 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         /// <summary>
-        /// Adds a check to see whether the topic exists in the specified namespace
+        /// Adds a health check to see whether the specified topic exists, and optionally, checking configuration details.
         /// </summary>
-        /// <param name="builder">The ASP.Net Core health check builder</param>
-        /// <param name="topicName">The topic to be checked</param>
-        /// <param name="requiredConfiguration">Options to fail the check</param>
+        /// <param name="builder">The ASP.Net Core health check builder.</param>
+        /// <param name="topicName">The topic to be checked.</param>
+        /// <param name="requiredConfiguration">Setup for the options specific to this topic.</param>
         public static IHealthChecksBuilder AddAzureServiceBusTopicCheck(this IHealthChecksBuilder builder, string topicName, Action<TopicHealthCheckOptions> requiredConfiguration = null)
         {
             if (builder == null)
@@ -71,12 +71,12 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         /// <summary>
-        /// Adds a check to see whether the subscription exists for the specified topic in the specified namespace
+        /// Adds a health check to see whether the specified subscription exists for the specified topic, and optionally, checking configuration details.
         /// </summary>
-        /// <param name="builder">The ASP.Net Core health check builder</param>
-        /// <param name="topicName">The topic to be checked</param>
-        /// <param name="subscriptionName">The subscription to be checked</param>
-        /// <param name="requiredConfiguration">Options to fail the check</param>
+        /// <param name="builder">The ASP.Net Core health check builder.</param>
+        /// <param name="topicName">The topic to be checked.</param>
+        /// <param name="subscriptionName">The subscription to be checked.</param>
+        /// <param name="requiredConfiguration">Setup for the options specific to this topic &amp; subscription.</param>
         public static IHealthChecksBuilder AddAzureServiceBusSubscriptionCheck(this IHealthChecksBuilder builder, string topicName, string subscriptionName, Action<SubscriptionHealthCheckOptions> requiredConfiguration = null)
         {
             if (builder == null)

@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Rest;
+using System;
 
 namespace SignalOne.HealthChecks.ServiceBus.Sample
 {
@@ -18,6 +20,15 @@ namespace SignalOne.HealthChecks.ServiceBus.Sample
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHealthChecks()
+                        .AddAzureServiceBusDefaults(options =>
+                        {
+                            options.BaseUri = new Uri("");
+                            options.ServiceCredentials = new BasicAuthenticationCredentials
+                            {
+                                Password = "",
+                                UserName = ""
+                            };
+                        })
                         .AddAzureServiceBusQueueCheck("my-queue", requiredConfiguration =>
                         {
                             //requiredConfiguration.MaxDeliveryCount = 10; // TODO :: implement

@@ -9,6 +9,35 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests
 {
     public class HealthCheckBuilderExtensionsTests
     {
+        public class AddAzureServiceBusDefaults : HealthCheckBuilderTestSuite
+        {
+            [Fact]
+            public void WhenHealthCheckBuilderIsNull_ThrowArgumentNullException()
+            {
+                IHealthChecksBuilder builder = null;
+
+                Action act = () => builder.AddAzureServiceBusDefaults(options => { });
+
+                act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("builder");
+            }
+
+            [Fact]
+            public void WhenDefaultSetupIsNull_ThrowArgumentNullException()
+            {
+                Action act = () => Builder.Object.AddAzureServiceBusDefaults(null);
+
+                act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("defaultSetup");
+            }
+
+            [Fact]
+            public void WhenDefaultSetupIsNotNull_DoesNotThrow()
+            {
+                Action act = () => Builder.Object.AddAzureServiceBusDefaults(options => { });
+
+                act.Should().NotThrow();
+            }
+        }
+
         public class AddAzureServiceBusQueueCheck : HealthCheckBuilderTestSuite
         {
             private const string QueueName = "testing";
