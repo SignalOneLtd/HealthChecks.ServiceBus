@@ -20,7 +20,7 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Checks
         {
             try
             {
-                var queue = await managementClient.Queues.GetAsync("", "", options.QueueName, cancellationToken); // TODO :: expose first two properties
+                var queue = await managementClient.Queues.GetAsync(options.ResourceGroupName, options.Namespace, options.QueueName, cancellationToken); // TODO :: expose first two properties
 
                 // TODO :: validate additional configuration
 

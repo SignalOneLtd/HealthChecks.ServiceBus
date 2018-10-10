@@ -23,6 +23,8 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Configuration
             private readonly QueueHealthCheckOptions _source = new QueueHealthCheckOptions();
             private readonly HealthCheckOptions _defaults = new HealthCheckOptions
             {
+                Namespace = "NSP",
+                ResourceGroupName = "RGN",
                 BaseUri = new Uri("https://azure.com"),
                 ServiceCredentials = new BasicAuthenticationCredentials { Password = "PWD", UserName = "UNAME" }
             };
@@ -81,6 +83,42 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Configuration
 
                 _source.ServiceCredentials.Should().NotBeSameAs(_defaults.ServiceCredentials);
             }
+
+            [Fact]
+            public void WhenOptionsAreValid_AndResourceGroupNameIsNull_SetBaseUri()
+            {
+                _target.PostConfigure("default", _source);
+
+                _source.ResourceGroupName.Should().BeSameAs(_defaults.ResourceGroupName);
+            }
+
+            [Fact]
+            public void WhenOptionsAreValid_AndResourceGroupNameIsNotNull_SetBaseUri()
+            {
+                _source.ResourceGroupName = "resource group name";
+
+                _target.PostConfigure("default", _source);
+
+                _source.ResourceGroupName.Should().NotBeSameAs(_defaults.ResourceGroupName);
+            }
+
+            [Fact]
+            public void WhenOptionsAreValid_AndNamespaceIsNull_SetBaseUri()
+            {
+                _target.PostConfigure("default", _source);
+
+                _source.Namespace.Should().BeSameAs(_defaults.Namespace);
+            }
+
+            [Fact]
+            public void WhenOptionsAreValid_AndNamespaceIsNotNull_SetBaseUri()
+            {
+                _source.Namespace = "test";
+
+                _target.PostConfigure("default", _source);
+
+                _source.Namespace.Should().NotBeSameAs(_defaults.Namespace);
+            }
         }
 
         public class Configure_TopicHealthCheckOptions
@@ -88,6 +126,8 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Configuration
             private readonly TopicHealthCheckOptions _source = new TopicHealthCheckOptions();
             private readonly HealthCheckOptions _defaults = new HealthCheckOptions
             {
+                Namespace = "NSP",
+                ResourceGroupName = "RGN",
                 BaseUri = new Uri("https://azure.com"),
                 ServiceCredentials = new BasicAuthenticationCredentials { Password = "PWD", UserName = "UNAME" }
             };
@@ -146,6 +186,42 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Configuration
 
                 _source.ServiceCredentials.Should().NotBeSameAs(_defaults.ServiceCredentials);
             }
+
+            [Fact]
+            public void WhenOptionsAreValid_AndResourceGroupNameIsNull_SetBaseUri()
+            {
+                _target.PostConfigure("default", _source);
+
+                _source.ResourceGroupName.Should().BeSameAs(_defaults.ResourceGroupName);
+            }
+
+            [Fact]
+            public void WhenOptionsAreValid_AndResourceGroupNameIsNotNull_SetBaseUri()
+            {
+                _source.ResourceGroupName = "resource group name";
+
+                _target.PostConfigure("default", _source);
+
+                _source.ResourceGroupName.Should().NotBeSameAs(_defaults.ResourceGroupName);
+            }
+
+            [Fact]
+            public void WhenOptionsAreValid_AndNamespaceIsNull_SetBaseUri()
+            {
+                _target.PostConfigure("default", _source);
+
+                _source.Namespace.Should().BeSameAs(_defaults.Namespace);
+            }
+
+            [Fact]
+            public void WhenOptionsAreValid_AndNamespaceIsNotNull_SetBaseUri()
+            {
+                _source.Namespace = "test";
+
+                _target.PostConfigure("default", _source);
+
+                _source.Namespace.Should().NotBeSameAs(_defaults.Namespace);
+            }
         }
 
         public class Configure_SubscriptionHealthCheckOptions
@@ -153,6 +229,8 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Configuration
             private readonly SubscriptionHealthCheckOptions _source = new SubscriptionHealthCheckOptions();
             private readonly HealthCheckOptions _defaults = new HealthCheckOptions
             {
+                Namespace = "NSP",
+                ResourceGroupName = "RGN",
                 BaseUri = new Uri("https://azure.com"),
                 ServiceCredentials = new BasicAuthenticationCredentials { Password = "PWD", UserName = "UNAME" }
             };
@@ -210,6 +288,42 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Configuration
                 _target.PostConfigure("default", _source);
 
                 _source.ServiceCredentials.Should().NotBeSameAs(_defaults.ServiceCredentials);
+            }
+
+            [Fact]
+            public void WhenOptionsAreValid_AndResourceGroupNameIsNull_SetBaseUri()
+            {
+                _target.PostConfigure("default", _source);
+
+                _source.ResourceGroupName.Should().BeSameAs(_defaults.ResourceGroupName);
+            }
+
+            [Fact]
+            public void WhenOptionsAreValid_AndResourceGroupNameIsNotNull_SetBaseUri()
+            {
+                _source.ResourceGroupName = "resource group name";
+
+                _target.PostConfigure("default", _source);
+
+                _source.ResourceGroupName.Should().NotBeSameAs(_defaults.ResourceGroupName);
+            }
+
+            [Fact]
+            public void WhenOptionsAreValid_AndNamespaceIsNull_SetBaseUri()
+            {
+                _target.PostConfigure("default", _source);
+
+                _source.Namespace.Should().BeSameAs(_defaults.Namespace);
+            }
+
+            [Fact]
+            public void WhenOptionsAreValid_AndNamespaceIsNotNull_SetBaseUri()
+            {
+                _source.Namespace = "test";
+
+                _target.PostConfigure("default", _source);
+
+                _source.Namespace.Should().NotBeSameAs(_defaults.Namespace);
             }
         }
     }

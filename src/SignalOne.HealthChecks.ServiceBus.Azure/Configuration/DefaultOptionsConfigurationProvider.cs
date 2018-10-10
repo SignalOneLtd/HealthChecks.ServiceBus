@@ -34,6 +34,12 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Configuration
 
             if (options.ServiceCredentials == null)
                 options.ServiceCredentials = defaults.ServiceCredentials;
+
+            if (options.Namespace == null)
+                options.Namespace = defaults.Namespace;
+
+            if (options.ResourceGroupName == null)
+                options.ResourceGroupName = defaults.ResourceGroupName;
         }
     }
 }

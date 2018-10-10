@@ -16,5 +16,15 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Configuration
         /// Credentials needed for the client to connect to the Azure Namespace.
         /// </summary>
         public ServiceClientCredentials ServiceCredentials { get; set; }
+
+        /// <summary>
+        /// Name of the Resource group within the Azure subscription.
+        /// </summary>
+        public string ResourceGroupName { get; set; }
+
+        /// <summary>
+        /// The name of the service bus namespace
+        /// </summary>
+        public string Namespace { get; set; }
     }
 }
