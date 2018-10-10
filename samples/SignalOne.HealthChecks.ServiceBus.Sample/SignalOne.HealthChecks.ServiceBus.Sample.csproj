@@ -14,7 +14,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\SignalOne.HealthChecks.ServiceBus.Amazon\SignalOne.HealthChecks.ServiceBus.Amazon.csproj" />
     <ProjectReference Include="..\..\src\SignalOne.HealthChecks.ServiceBus.Azure\SignalOne.HealthChecks.ServiceBus.Azure.csproj" />
+    <ProjectReference Include="..\..\src\SignalOne.HealthChecks.ServiceBus.Kafka\SignalOne.HealthChecks.ServiceBus.Kafka.csproj" />
     <ProjectReference Include="..\..\src\SignalOne.HealthChecks.ServiceBus.RabbitMQ\SignalOne.HealthChecks.ServiceBus.RabbitMQ.csproj" />
   </ItemGroup>
 </Project>
