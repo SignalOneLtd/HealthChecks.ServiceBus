@@ -1,4 +1,5 @@
-﻿using SignalOne.HealthChecks.ServiceBus.Azure.Checks;
+﻿using SignalOne.HealthChecks.ServiceBus.Azure;
+using SignalOne.HealthChecks.ServiceBus.Azure.Checks;
 using SignalOne.HealthChecks.ServiceBus.Azure.Configuration;
 using System;
 
@@ -41,7 +42,7 @@ namespace Microsoft.Extensions.DependencyInjection
             if (string.IsNullOrWhiteSpace(queueName))
                 throw new ArgumentNullException(nameof(queueName));
 
-            builder.Services.Configure<QueueHealthCheckOptions>(queueName, config => // TODO :: Convert others to this style & verify tests...
+            builder.Services.AddAzureServiceBusDefaultServices().Configure<QueueHealthCheckOptions>(queueName, config => // TODO :: Convert others to this style & verify tests...
             {
                 config.QueueName = queueName;
                 requiredConfiguration?.Invoke(config);
@@ -64,7 +65,7 @@ namespace Microsoft.Extensions.DependencyInjection
             if (string.IsNullOrWhiteSpace(topicName))
                 throw new ArgumentNullException(nameof(topicName));
 
-            builder.Services.Configure<TopicHealthCheckOptions>(topicName, config =>
+            builder.Services.AddAzureServiceBusDefaultServices().Configure<TopicHealthCheckOptions>(topicName, config =>
             {
                 config.TopicName = topicName;
                 requiredConfiguration?.Invoke(config);
@@ -93,7 +94,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             var topicSubscriptionName = $"{topicName}/{subscriptionName}";
 
-            builder.Services.Configure<SubscriptionHealthCheckOptions>(topicSubscriptionName, config =>
+            builder.Services.AddAzureServiceBusDefaultServices().Configure<SubscriptionHealthCheckOptions>(topicSubscriptionName, config =>
             {
                 config.TopicName = topicName;
                 config.SubscriptionName = subscriptionName;
