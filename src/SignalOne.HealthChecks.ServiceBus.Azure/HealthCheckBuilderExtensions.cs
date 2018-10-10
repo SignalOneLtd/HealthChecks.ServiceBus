@@ -45,7 +45,7 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 config.QueueName = queueName;
                 requiredConfiguration?.Invoke(config);
-            }); // TODO :: support queues across namespaces
+            });
 
             return builder.AddCheck<QueueHealthCheck>(queueName);
         }
@@ -64,8 +64,11 @@ namespace Microsoft.Extensions.DependencyInjection
             if (string.IsNullOrWhiteSpace(topicName))
                 throw new ArgumentNullException(nameof(topicName));
 
-            if (requiredConfiguration != null)
-                builder.Services.Configure(topicName, requiredConfiguration); // TODO :: support topics across namespaces
+            builder.Services.Configure<TopicHealthCheckOptions>(topicName, config =>
+            {
+                config.TopicName = topicName;
+                requiredConfiguration?.Invoke(config);
+            });
 
             return builder.AddCheck<TopicHealthCheck>(topicName);
         }
@@ -90,8 +93,12 @@ namespace Microsoft.Extensions.DependencyInjection
 
             var topicSubscriptionName = $"{topicName}/{subscriptionName}";
 
-            if (requiredConfiguration != null)
-                builder.Services.Configure(topicSubscriptionName, requiredConfiguration); // TODO :: support topics across namespaces
+            builder.Services.Configure<SubscriptionHealthCheckOptions>(topicSubscriptionName, config =>
+            {
+                config.TopicName = topicName;
+                config.SubscriptionName = subscriptionName;
+                requiredConfiguration?.Invoke(config);
+            });
 
             return builder.AddCheck<SubscriptionHealthCheck>(topicSubscriptionName);
         }

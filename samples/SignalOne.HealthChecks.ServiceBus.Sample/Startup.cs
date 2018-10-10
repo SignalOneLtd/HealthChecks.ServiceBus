@@ -29,9 +29,9 @@ namespace SignalOne.HealthChecks.ServiceBus.Sample
                                 UserName = ""
                             };
                         })
-                        .AddAzureServiceBusQueueCheck("my-queue", requiredConfiguration =>
+                        .AddAzureServiceBusQueueCheck("my-queue", config =>
                         {
-                            //requiredConfiguration.MaxDeliveryCount = 10; // TODO :: implement
+                            //config.MaxDeliveryCount = 10; // TODO :: implement
                         })
                         .AddAzureServiceBusTopicCheck("my-topic")
                         .AddAzureServiceBusSubscriptionCheck("my-topic", "my-subscription");

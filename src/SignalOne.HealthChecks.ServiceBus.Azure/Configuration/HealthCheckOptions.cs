@@ -4,16 +4,16 @@ using System;
 namespace SignalOne.HealthChecks.ServiceBus.Azure.Configuration
 {
     /// <summary>
-    /// Configure Global Options
+    /// Configuration settings that apply across all entities.
     /// </summary>
     public class HealthCheckOptions
     {
         /// <summary>
-        /// The base Azure Uri.
+        /// The URI of the Azure Namespace.
         /// </summary>
         public Uri BaseUri { get; set; }
         /// <summary>
-        /// Credentials needed for the client to connect to Azure.
+        /// Credentials needed for the client to connect to the Azure Namespace.
         /// </summary>
         public ServiceClientCredentials ServiceCredentials { get; set; }
     }

@@ -1,13 +1,13 @@
 ﻿namespace SignalOne.HealthChecks.ServiceBus.Azure.Configuration
 {
     /// <summary>
-    /// Options specific to a queue
+    /// Configuration that is specific to a Queue.
     /// </summary>
     public class QueueHealthCheckOptions : HealthCheckOptions
     {
         /// <summary>
-        /// The queue name that these settings refer to...
+        /// The name of the queue.
         /// </summary>
-        public string QueueName { get; set; }
+        public string QueueName { get; internal set; }
     }
 }
