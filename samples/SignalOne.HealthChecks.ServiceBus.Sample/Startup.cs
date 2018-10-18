@@ -25,7 +25,7 @@ namespace SignalOne.HealthChecks.ServiceBus.Sample
                             options.Namespace = "signalone";
                             options.ServiceCredentials = SdkContext.AzureCredentialsFactory.FromFile(Environment.GetEnvironmentVariable("AZURE_AUTH_LOCATION"));
                         })
-                        .AddAzureServiceBusQueueCheck("test-queue");
+                        .AddAzureServiceBusQueueCheck("test-queue")
                         .AddAzureServiceBusTopicCheck("test-topic")
                         .AddAzureServiceBusSubscriptionCheck("test-topic", "test-subscription");
             services.AddMvc();
