@@ -1,6 +1,5 @@
 <Project>
   <PropertyGroup>
-
     <!-- Package Information -->
     <Authors>Im5tu</Authors>
     <Product>SignalOne.HealthChecks</Product>
@@ -15,6 +14,7 @@
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <Deterministic>true</Deterministic>
     <LangVersion>latest</LangVersion>
+    <Optimize Condition="$(Configuration) == 'Release'">true</Optimize>
 
     <!-- Package Versions -->
     <AspNetCorePackageVersion>2.2.0-preview3-35359</AspNetCorePackageVersion>

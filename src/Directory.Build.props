@@ -10,7 +10,7 @@
 
     <!-- Strong naming -->
     <AssemblyOriginatorKeyFile>..\..\build\$(MSBuildProjectName).snk</AssemblyOriginatorKeyFile>
-    <SignAssembly Condition="$(Configuration) == 'Release'">true</SignAssembly>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
 
   <!-- Sources Packages Settings -->
@@ -38,14 +38,14 @@
   </Target>
   
   <!-- Source Link Support -->
-  <PropertyGroup>
+  <PropertyGroup Condition="$(SourcesPackage) == '' AND $(Configuration) == 'Release'">
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <DebugSymbols>true</DebugSymbols>
     <DebugType Condition="$(CollectCoverage) == 'false'">embedded</DebugType>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-62925-02" PrivateAssets="All" />
+  <ItemGroup Condition="$(SourcesPackage) == '' AND $(Configuration) == 'Release'">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
   </ItemGroup>
 </Project>
