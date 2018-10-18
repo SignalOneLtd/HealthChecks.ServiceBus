@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using SignalOne.HealthChecks.ServiceBus.Azure.Configuration;
+using SignalOne.HealthChecks.ServiceBus.Azure.Management;
 using System;
 
 namespace SignalOne.HealthChecks.ServiceBus.Azure
@@ -16,6 +17,7 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure
             services.TryAddSingleton<IPostConfigureOptions<QueueHealthCheckOptions>, DefaultOptionsConfigurationProvider>();
             services.TryAddSingleton<IPostConfigureOptions<TopicHealthCheckOptions>, DefaultOptionsConfigurationProvider>();
             services.TryAddSingleton<IPostConfigureOptions<SubscriptionHealthCheckOptions>, DefaultOptionsConfigurationProvider>();
+            services.TryAddSingleton<IServiceBusManagementClientFactory, ServiceBusManagementClientFactory>();
 
             return services;
         }

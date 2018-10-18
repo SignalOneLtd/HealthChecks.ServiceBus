@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Azure.Management.ResourceManager.Fluent;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Rest;
 using System;
 
 namespace SignalOne.HealthChecks.ServiceBus.Sample
@@ -22,19 +22,12 @@ namespace SignalOne.HealthChecks.ServiceBus.Sample
             services.AddHealthChecks()
                         .AddAzureServiceBusDefaults(options =>
                         {
-                            options.BaseUri = new Uri("");
-                            options.ServiceCredentials = new BasicAuthenticationCredentials
-                            {
-                                Password = "",
-                                UserName = ""
-                            };
+                            options.Namespace = "signalone";
+                            options.ServiceCredentials = SdkContext.AzureCredentialsFactory.FromFile(Environment.GetEnvironmentVariable("AZURE_AUTH_LOCATION"));
                         })
-                        .AddAzureServiceBusQueueCheck("my-queue", config =>
-                        {
-                            //config.MaxDeliveryCount = 10; // TODO :: implement
-                        })
-                        .AddAzureServiceBusTopicCheck("my-topic")
-                        .AddAzureServiceBusSubscriptionCheck("my-topic", "my-subscription");
+                        .AddAzureServiceBusQueueCheck("test-queue");
+                        .AddAzureServiceBusTopicCheck("test-topic")
+                        .AddAzureServiceBusSubscriptionCheck("test-topic", "test-subscription");
             services.AddMvc();
         }
 
@@ -42,13 +35,6 @@ namespace SignalOne.HealthChecks.ServiceBus.Sample
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseHealthChecks("/health");
-
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
-            });
         }
     }
 }

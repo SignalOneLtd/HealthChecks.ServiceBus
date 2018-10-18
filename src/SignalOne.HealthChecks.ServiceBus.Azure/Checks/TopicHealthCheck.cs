@@ -16,11 +16,11 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Checks
         {
         }
 
-        protected override async Task<HealthCheckResult> ExecuteHealthCheckAsync(HealthCheckContext context, TopicHealthCheckOptions options, IServiceBusManagementClient managementClient, CancellationToken cancellationToken)
+        protected override async Task<HealthCheckResult> ExecuteHealthCheckAsync(HealthCheckContext context, TopicHealthCheckOptions options, IServiceBusNamespace client, CancellationToken cancellationToken)
         {
             try
             {
-                var queue = await managementClient.Topics.GetAsync(options.ResourceGroupName, options.Namespace, options.TopicName, cancellationToken); // TODO :: expose first two properties
+                var topic = await client.Topics.GetByNameAsync(options.TopicName, cancellationToken);
 
                 // TODO :: validate additional configuration
 

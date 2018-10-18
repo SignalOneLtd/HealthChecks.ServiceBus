@@ -5,6 +5,6 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Management
 {
     internal interface IServiceBusManagementClientFactory
     {
-        IServiceBusManagementClient CreateClient(HealthCheckOptions options);
+        IServiceBusNamespace CreateClient(HealthCheckOptions options);
     }
 }

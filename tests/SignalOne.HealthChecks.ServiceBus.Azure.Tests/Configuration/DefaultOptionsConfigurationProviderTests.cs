@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
+using Microsoft.Azure.Management.ResourceManager.Fluent;
+using Microsoft.Azure.Management.ResourceManager.Fluent.Authentication;
 using Microsoft.Extensions.Options;
-using Microsoft.Rest;
 using Moq;
 using SignalOne.HealthChecks.ServiceBus.Azure.Configuration;
 using System;
@@ -24,9 +25,7 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Configuration
             private readonly HealthCheckOptions _defaults = new HealthCheckOptions
             {
                 Namespace = "NSP",
-                ResourceGroupName = "RGN",
-                BaseUri = new Uri("https://azure.com"),
-                ServiceCredentials = new BasicAuthenticationCredentials { Password = "PWD", UserName = "UNAME" }
+                ServiceCredentials = new AzureCredentials(new MSILoginInformation(MSIResourceType.AppService), AzureEnvironment.AzureGlobalCloud)
             };
             private readonly Mock<IOptions<HealthCheckOptions>> _defaultOptions;
             private readonly DefaultOptionsConfigurationProvider _target;
@@ -49,24 +48,6 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Configuration
             }
 
             [Fact]
-            public void WhenOptionsAreValid_AndBaseUriIsNull_SetBaseUri()
-            {
-                _target.PostConfigure("default", _source);
-
-                _source.BaseUri.Should().BeSameAs(_defaults.BaseUri);
-            }
-
-            [Fact]
-            public void WhenOptionsAreValid_AndBaseUriIsNotNull_SetBaseUri()
-            {
-                _source.BaseUri = new Uri("https://google.com");
-
-                _target.PostConfigure("default", _source);
-
-                _source.BaseUri.Should().NotBeSameAs(_defaults.BaseUri);
-            }
-
-            [Fact]
             public void WhenOptionsAreValid_AndServiceCredentialsIsNull_SetBaseUri()
             {
                 _target.PostConfigure("default", _source);
@@ -77,29 +58,11 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Configuration
             [Fact]
             public void WhenOptionsAreValid_AndServiceCredentialsAreNotNull_SetBaseUri()
             {
-                _source.ServiceCredentials = new BasicAuthenticationCredentials { UserName = "hi", Password = "ibiza" };
+                _source.ServiceCredentials = new AzureCredentials(new MSILoginInformation(MSIResourceType.AppService), AzureEnvironment.AzureGlobalCloud);
 
                 _target.PostConfigure("default", _source);
 
                 _source.ServiceCredentials.Should().NotBeSameAs(_defaults.ServiceCredentials);
-            }
-
-            [Fact]
-            public void WhenOptionsAreValid_AndResourceGroupNameIsNull_SetBaseUri()
-            {
-                _target.PostConfigure("default", _source);
-
-                _source.ResourceGroupName.Should().BeSameAs(_defaults.ResourceGroupName);
-            }
-
-            [Fact]
-            public void WhenOptionsAreValid_AndResourceGroupNameIsNotNull_SetBaseUri()
-            {
-                _source.ResourceGroupName = "resource group name";
-
-                _target.PostConfigure("default", _source);
-
-                _source.ResourceGroupName.Should().NotBeSameAs(_defaults.ResourceGroupName);
             }
 
             [Fact]
@@ -127,9 +90,7 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Configuration
             private readonly HealthCheckOptions _defaults = new HealthCheckOptions
             {
                 Namespace = "NSP",
-                ResourceGroupName = "RGN",
-                BaseUri = new Uri("https://azure.com"),
-                ServiceCredentials = new BasicAuthenticationCredentials { Password = "PWD", UserName = "UNAME" }
+                ServiceCredentials = new AzureCredentials(new MSILoginInformation(MSIResourceType.AppService), AzureEnvironment.AzureGlobalCloud)
             };
             private readonly Mock<IOptions<HealthCheckOptions>> _defaultOptions;
             private readonly DefaultOptionsConfigurationProvider _target;
@@ -152,24 +113,6 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Configuration
             }
 
             [Fact]
-            public void WhenOptionsAreValid_AndBaseUriIsNull_SetBaseUri()
-            {
-                _target.PostConfigure("default", _source);
-
-                _source.BaseUri.Should().BeSameAs(_defaults.BaseUri);
-            }
-
-            [Fact]
-            public void WhenOptionsAreValid_AndBaseUriIsNotNull_SetBaseUri()
-            {
-                _source.BaseUri = new Uri("https://google.com");
-
-                _target.PostConfigure("default", _source);
-
-                _source.BaseUri.Should().NotBeSameAs(_defaults.BaseUri);
-            }
-
-            [Fact]
             public void WhenOptionsAreValid_AndServiceCredentialsIsNull_SetBaseUri()
             {
                 _target.PostConfigure("default", _source);
@@ -180,29 +123,11 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Configuration
             [Fact]
             public void WhenOptionsAreValid_AndServiceCredentialsAreNotNull_SetBaseUri()
             {
-                _source.ServiceCredentials = new BasicAuthenticationCredentials { UserName = "hi", Password = "ibiza" };
+                _source.ServiceCredentials = new AzureCredentials(new MSILoginInformation(MSIResourceType.AppService), AzureEnvironment.AzureGlobalCloud);
 
                 _target.PostConfigure("default", _source);
 
                 _source.ServiceCredentials.Should().NotBeSameAs(_defaults.ServiceCredentials);
-            }
-
-            [Fact]
-            public void WhenOptionsAreValid_AndResourceGroupNameIsNull_SetBaseUri()
-            {
-                _target.PostConfigure("default", _source);
-
-                _source.ResourceGroupName.Should().BeSameAs(_defaults.ResourceGroupName);
-            }
-
-            [Fact]
-            public void WhenOptionsAreValid_AndResourceGroupNameIsNotNull_SetBaseUri()
-            {
-                _source.ResourceGroupName = "resource group name";
-
-                _target.PostConfigure("default", _source);
-
-                _source.ResourceGroupName.Should().NotBeSameAs(_defaults.ResourceGroupName);
             }
 
             [Fact]
@@ -230,9 +155,7 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Configuration
             private readonly HealthCheckOptions _defaults = new HealthCheckOptions
             {
                 Namespace = "NSP",
-                ResourceGroupName = "RGN",
-                BaseUri = new Uri("https://azure.com"),
-                ServiceCredentials = new BasicAuthenticationCredentials { Password = "PWD", UserName = "UNAME" }
+                ServiceCredentials = new AzureCredentials(new MSILoginInformation(MSIResourceType.AppService), AzureEnvironment.AzureGlobalCloud)
             };
             private readonly Mock<IOptions<HealthCheckOptions>> _defaultOptions;
             private readonly DefaultOptionsConfigurationProvider _target;
@@ -255,24 +178,6 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Configuration
             }
 
             [Fact]
-            public void WhenOptionsAreValid_AndBaseUriIsNull_SetBaseUri()
-            {
-                _target.PostConfigure("default", _source);
-
-                _source.BaseUri.Should().BeSameAs(_defaults.BaseUri);
-            }
-
-            [Fact]
-            public void WhenOptionsAreValid_AndBaseUriIsNotNull_SetBaseUri()
-            {
-                _source.BaseUri = new Uri("https://google.com");
-
-                _target.PostConfigure("default", _source);
-
-                _source.BaseUri.Should().NotBeSameAs(_defaults.BaseUri);
-            }
-
-            [Fact]
             public void WhenOptionsAreValid_AndServiceCredentialsIsNull_SetBaseUri()
             {
                 _target.PostConfigure("default", _source);
@@ -283,29 +188,11 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Configuration
             [Fact]
             public void WhenOptionsAreValid_AndServiceCredentialsAreNotNull_SetBaseUri()
             {
-                _source.ServiceCredentials = new BasicAuthenticationCredentials { UserName = "hi", Password = "ibiza" };
+                _source.ServiceCredentials = new AzureCredentials(new MSILoginInformation(MSIResourceType.AppService), AzureEnvironment.AzureGlobalCloud);
 
                 _target.PostConfigure("default", _source);
 
                 _source.ServiceCredentials.Should().NotBeSameAs(_defaults.ServiceCredentials);
-            }
-
-            [Fact]
-            public void WhenOptionsAreValid_AndResourceGroupNameIsNull_SetBaseUri()
-            {
-                _target.PostConfigure("default", _source);
-
-                _source.ResourceGroupName.Should().BeSameAs(_defaults.ResourceGroupName);
-            }
-
-            [Fact]
-            public void WhenOptionsAreValid_AndResourceGroupNameIsNotNull_SetBaseUri()
-            {
-                _source.ResourceGroupName = "resource group name";
-
-                _target.PostConfigure("default", _source);
-
-                _source.ResourceGroupName.Should().NotBeSameAs(_defaults.ResourceGroupName);
             }
 
             [Fact]

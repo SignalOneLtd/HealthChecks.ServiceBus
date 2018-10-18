@@ -33,6 +33,6 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Checks
             return ExecuteHealthCheckAsync(context, checkOptions, _managementClientFactory.CreateClient(checkOptions), cancellationToken);
         }
 
-        protected abstract Task<HealthCheckResult> ExecuteHealthCheckAsync(HealthCheckContext context, T options, IServiceBusManagementClient managementClient, CancellationToken cancellationToken);
+        protected abstract Task<HealthCheckResult> ExecuteHealthCheckAsync(HealthCheckContext context, T options, IServiceBusNamespace client, CancellationToken cancellationToken);
     }
 }

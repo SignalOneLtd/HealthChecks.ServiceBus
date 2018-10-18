@@ -14,6 +14,6 @@
     <LangVersion>latest</LangVersion>
 
     <!-- Package Versions -->
-    <AspNetCorePackageVersion>2.2.0-preview3-*</AspNetCorePackageVersion>
+    <AspNetCorePackageVersion>2.2.0-preview3-35359</AspNetCorePackageVersion>
   </PropertyGroup>
 </Project>
