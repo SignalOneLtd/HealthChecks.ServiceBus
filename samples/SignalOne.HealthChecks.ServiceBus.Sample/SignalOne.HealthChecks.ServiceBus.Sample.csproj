@@ -1,10 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <!-- Workarounds for dogfooding nightly builds -->
-    <OutputType>Exe</OutputType>
-    <RuntimeFrameworkVersion>$(AspNetCorePackageVersion)</RuntimeFrameworkVersion>
-    <NETCoreAppMaximumVersion>2.2</NETCoreAppMaximumVersion>
+    <NoWarn>NETSDK1071</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="$(AspNetCorePackageVersion)" />
@@ -18,5 +15,8 @@
     <ProjectReference Include="..\..\src\SignalOne.HealthChecks.ServiceBus.Azure\SignalOne.HealthChecks.ServiceBus.Azure.csproj" />
     <ProjectReference Include="..\..\src\SignalOne.HealthChecks.ServiceBus.Kafka\SignalOne.HealthChecks.ServiceBus.Kafka.csproj" />
     <ProjectReference Include="..\..\src\SignalOne.HealthChecks.ServiceBus.RabbitMQ\SignalOne.HealthChecks.ServiceBus.RabbitMQ.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 </Project>
