@@ -4,13 +4,17 @@
   <PropertyGroup>
     <!-- Package Settings -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <IsPackable Condition="$(Configuration) == 'Release'" >true</IsPackable>
+    <IsPackable Condition="$(Configuration) == 'Release'">true</IsPackable>
     <GeneratePackageOnBuild Condition="$(IsPackable) == 'true' AND ($(CollectCoverage) == '' OR $(CollectCoverage) == 'false')">true</GeneratePackageOnBuild>
     <PackageTags>SignalOne HealthChecks AspNetCore Diagnostics</PackageTags>
     
     <!-- Debug Settings -->
     <DebugSymbols>true</DebugSymbols>
     <DebugType Condition="$(CollectCoverage) == 'false'">embedded</DebugType>
+    
+    <!-- Strong naming -->
+    <AssemblyOriginatorKeyFile>..\..\build\$(MSBuildProjectName).snk</AssemblyOriginatorKeyFile>
+    <SignAssembly Condition="$(Configuration) == 'Release'">true</SignAssembly>
   </PropertyGroup>
 
   <!-- Sources Packages Settings -->
