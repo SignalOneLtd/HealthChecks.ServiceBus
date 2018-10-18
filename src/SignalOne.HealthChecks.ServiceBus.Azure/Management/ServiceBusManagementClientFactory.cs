@@ -12,11 +12,16 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Management
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
 
+            // TODO :: Support alternative subscription id's
+            // TODO :: Support UserAgents
+            // TODO :: Support Logging Level
             var azureClient = Microsoft.Azure.Management.Fluent.Azure
                                                         .Configure()
                                                         .Authenticate(options.ServiceCredentials)
                                                         .WithDefaultSubscription();
 
+            // TODO :: Support looking up by Namespace ID (GUID)
+            // TODO :: Use Async Overloads
             var sbNamespace = azureClient.ServiceBusNamespaces.List().FirstOrDefault(x => x.Name.Equals(options.Namespace, StringComparison.OrdinalIgnoreCase));
 
             if (sbNamespace == null)
