@@ -1,7 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageTags>$(PackageTags) Amazon ServiceBus SQS</PackageTags>
+    <Description Condition="$(SourcesPackage) == ''">Adds ASP.NET Core health checks for Amazon SQS</Description>
   </PropertyGroup>
 
 </Project>

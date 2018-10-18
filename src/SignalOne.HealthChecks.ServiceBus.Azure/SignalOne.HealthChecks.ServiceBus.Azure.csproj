@@ -1,12 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>Adds ASP.NET Core health checks for Azure Service Bus</Description>
+    <PackageTags>$(PackageTags) Azure ServiceBus EventHubs</PackageTags>
+    <Description Condition="$(SourcesPackage) == ''">Adds ASP.NET Core health checks for Azure Service Bus &amp; Event Hubs</Description>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Management.Fluent" Version="1.16.1" />
   </ItemGroup>
-
 </Project>

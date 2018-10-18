@@ -37,15 +37,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalOne.HealthChecks.Serv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalOne.HealthChecks.ServiceBus.Sample", "samples\SignalOne.HealthChecks.ServiceBus.Sample\SignalOne.HealthChecks.ServiceBus.Sample.csproj", "{F265FCD5-7420-4DC6-9BA8-7FE37735C1D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalOne.HealthChecks.ServiceBus.TestHelpers", "tests\SignalOne.HealthChecks.ServiceBus.TestHelpers\SignalOne.HealthChecks.ServiceBus.TestHelpers.csproj", "{158B59AA-43E9-46B0-ACEA-511018BD4BEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalOne.HealthChecks.ServiceBus.TestHelpers", "tests\SignalOne.HealthChecks.ServiceBus.TestHelpers\SignalOne.HealthChecks.ServiceBus.TestHelpers.csproj", "{158B59AA-43E9-46B0-ACEA-511018BD4BEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalOne.HealthChecks.ServiceBus.Kafka", "src\SignalOne.HealthChecks.ServiceBus.Kafka\SignalOne.HealthChecks.ServiceBus.Kafka.csproj", "{10240361-215A-40B6-938D-AC3E599B0BB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalOne.HealthChecks.ServiceBus.Kafka", "src\SignalOne.HealthChecks.ServiceBus.Kafka\SignalOne.HealthChecks.ServiceBus.Kafka.csproj", "{10240361-215A-40B6-938D-AC3E599B0BB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalOne.HealthChecks.ServiceBus.Amazon", "src\SignalOne.HealthChecks.ServiceBus.Amazon\SignalOne.HealthChecks.ServiceBus.Amazon.csproj", "{2910709E-6FC7-4A11-8B9B-C481F346FCC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalOne.HealthChecks.ServiceBus.Amazon", "src\SignalOne.HealthChecks.ServiceBus.Amazon\SignalOne.HealthChecks.ServiceBus.Amazon.csproj", "{2910709E-6FC7-4A11-8B9B-C481F346FCC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalOne.HealthChecks.ServiceBus.Amazon.Tests", "tests\SignalOne.HealthChecks.ServiceBus.Amazon.Tests\SignalOne.HealthChecks.ServiceBus.Amazon.Tests.csproj", "{711BFF19-BEC6-43AA-9C80-E565BE79E1E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalOne.HealthChecks.ServiceBus.Amazon.Tests", "tests\SignalOne.HealthChecks.ServiceBus.Amazon.Tests\SignalOne.HealthChecks.ServiceBus.Amazon.Tests.csproj", "{711BFF19-BEC6-43AA-9C80-E565BE79E1E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalOne.HealthChecks.ServiceBus.Kafka.Tests", "tests\SignalOne.HealthChecks.ServiceBus.Kafka.Tests\SignalOne.HealthChecks.ServiceBus.Kafka.Tests.csproj", "{BF6762F8-3707-4829-AE74-E415ABC29C2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalOne.HealthChecks.ServiceBus.Kafka.Tests", "tests\SignalOne.HealthChecks.ServiceBus.Kafka.Tests\SignalOne.HealthChecks.ServiceBus.Kafka.Tests.csproj", "{BF6762F8-3707-4829-AE74-E415ABC29C2B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{27DEFA11-5F85-45DD-9362-55D7304EA5D1}"
+	ProjectSection(SolutionItems) = preProject
+		build\build.ps1 = build\build.ps1
+		build\PackageSource.nuspec = build\PackageSource.nuspec
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

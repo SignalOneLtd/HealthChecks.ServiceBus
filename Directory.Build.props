@@ -7,6 +7,9 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
     <RepositoryUrl>https://github.com/SignalOneLtd/HealthChecks.ServiceBus</RepositoryUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/SignalOneLtd/Assets/master/logo-inverse-square.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/SignalOneLtd/HealthChecks.ServiceBus</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/SignalOneLtd/HealthChecks.ServiceBus/master/LICENSE</PackageLicenseUrl>
 
     <!-- Build Settings -->
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
