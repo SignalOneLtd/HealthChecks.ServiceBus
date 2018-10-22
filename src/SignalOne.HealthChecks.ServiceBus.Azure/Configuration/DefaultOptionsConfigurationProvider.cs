@@ -34,6 +34,18 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Configuration
 
             if (options.Namespace == null)
                 options.Namespace = defaults.Namespace;
+
+            if (options.LogLevel == null)
+                options.LogLevel = defaults.LogLevel;
+
+            if (string.IsNullOrWhiteSpace(options.SubscriptionId))
+                options.SubscriptionId = defaults.SubscriptionId;
+
+            if (string.IsNullOrWhiteSpace(options.Version))
+                options.Version = defaults.Version;
+
+            if (string.IsNullOrWhiteSpace(options.Product))
+                options.Product = defaults.Product;
         }
     }
 }
