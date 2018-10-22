@@ -1,7 +1,7 @@
 <Project>
   <Import Project="..\Directory.Build.targets" Condition="Exists('..\Directory.Build.targets')" />
 
-  <ItemGroup>
+  <ItemGroup Label="DefaultReferences">
     <PackageReference Include="FluentAssertions" Version="5.4.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="Moq" Version="4.10.0" />
@@ -9,7 +9,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.*" />
   </ItemGroup>
 
-  <ItemGroup Condition="$(AssemblyName.EndsWith('Tests'))">
+  <ItemGroup Label="TestAssemblyOnlyReferences" Condition="$(AssemblyName.EndsWith('Tests'))">
     <ProjectReference Include="..\SignalOne.HealthChecks.ServiceBus.TestHelpers\SignalOne.HealthChecks.ServiceBus.TestHelpers.csproj" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
     <PackageReference Include="coverlet.msbuild" Version="2.3.0">
@@ -18,7 +18,7 @@
     </PackageReference>
   </ItemGroup>
 
-  <Target Name="ConvertCodeCoverageOutput" AfterTargets="GenerateCoverageResults" Condition="$(TargetFramework) == 'netcoreapp2.0' AND $(AssemblyName.EndsWith('Tests')) AND $(CollectCoverage) == 'true'">
+  <Target Label="Report coverage conversion" Name="ConvertCodeCoverageOutput" AfterTargets="GenerateCoverageResults" Condition="$(TargetFramework) == 'netcoreapp2.0' AND $(AssemblyName.EndsWith('Tests')) AND $(CollectCoverage) == 'true'">
     <Exec Command="dotnet reportgenerator -reports:TestResults\Coverage\*.xml -targetdir:..\TestResults\Reports -reportTypes:htmlInline" WorkingDirectory="$(ProjectDir)" />
   </Target>
 </Project>

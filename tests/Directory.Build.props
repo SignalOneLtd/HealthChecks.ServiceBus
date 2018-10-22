@@ -1,17 +1,16 @@
 <Project>
   <Import Project="..\Directory.Build.props" Condition="Exists('..\Directory.Build.props')" />
 
-  <ItemGroup>
+  <ItemGroup Label="ExcludeTestResults">
     <Compile Remove="TestResults\**" />
     <EmbeddedResource Remove="TestResults\**" />
     <None Remove="TestResults\**" />
   </ItemGroup>
   
-  <PropertyGroup Condition="$(Configuration) == 'Release'">
+  <PropertyGroup Label="CollectCodeCoverageResultsOnRelease" Condition="$(Configuration) == 'Release'">
     <CollectCoverage>true</CollectCoverage>
-    <CoverletOutputFormat>opencover</CoverletOutputFormat> <!-- switch back to cobertura later -->
+    <CoverletOutputFormat>opencover</CoverletOutputFormat>  <!-- switch back to cobertura later -->
     <CoverletOutput>TestResults\Coverage\</CoverletOutput>
-    <!-- Coverlet needs full debug symbols -->
-    <DebugType>pdbonly</DebugType>
+    <DebugType>pdbonly</DebugType>                          <!-- Coverlet needs full debug symbols -->
   </PropertyGroup>
 </Project>

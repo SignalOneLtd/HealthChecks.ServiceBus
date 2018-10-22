@@ -1,20 +1,14 @@
 <Project>
   <Import Project="..\Directory.Build.props" Condition="Exists('..\Directory.Build.props')" />
 
-  <PropertyGroup>
-    <!-- Package Settings -->
+  <PropertyGroup Label="DefaultNugetPackageSettings">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsPackable Condition="$(Configuration) == 'Release'">true</IsPackable>
-    <GeneratePackageOnBuild Condition="$(IsPackable) == 'true' AND ($(CollectCoverage) == '' OR $(CollectCoverage) == 'false')">true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild Condition="$(IsPackable) == 'true' AND $(GeneratePackage) == 'true'">true</GeneratePackageOnBuild>
     <PackageTags>SignalOne HealthChecks AspNetCore Diagnostics</PackageTags>
-
-    <!-- Strong naming -->
-    <AssemblyOriginatorKeyFile>..\..\build\$(MSBuildProjectName).snk</AssemblyOriginatorKeyFile>
-    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
 
-  <!-- Sources Packages Settings -->
-  <PropertyGroup Condition="$(SourcesPackage) == 'true'">
+  <PropertyGroup Label="SourcesOnlyProperties" Condition="$(SourcesPackage) == 'true'">
     <Description>Sources package for $(MSBuildProjectName)</Description>
     <PackageId>$(MSBuildProjectName).Sources</PackageId>
     <IncludeBuildOutput>false</IncludeBuildOutput>
@@ -24,7 +18,7 @@
     <NoWarn>CS2008;NU5104;NETSDK1057;</NoWarn>
     <NoBuild>true</NoBuild>
   </PropertyGroup>
-  <Target Name="SourcesUpdate" BeforeTargets="BeforeBuild" Condition="$(SourcesPackage) == 'true'">
+  <Target Label="SourcesOnlyTarget" Name="SourcesUpdate" BeforeTargets="BeforeBuild" Condition="$(SourcesPackage) == 'true'">
     <ItemGroup>
       <Content Include="@(Compile)" Exclude="AssemblyAttributes.cs">
         <Pack>true</Pack>
@@ -37,15 +31,14 @@
     </ItemGroup>
   </Target>
   
-  <!-- Source Link Support -->
-  <PropertyGroup Condition="$(SourcesPackage) == '' AND $(Configuration) == 'Release'">
+  <PropertyGroup Label="SourceLinkOnlyProperties" Condition="$(SourcesPackage) == '' AND $(Configuration) == 'Release'">
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <DebugSymbols>true</DebugSymbols>
     <DebugType Condition="$(CollectCoverage) == 'false'">embedded</DebugType>
   </PropertyGroup>
-  <ItemGroup Condition="$(SourcesPackage) == '' AND $(Configuration) == 'Release'">
+  <ItemGroup Label="SourceLinkOnlyReferences" Condition="$(SourcesPackage) == '' AND $(Configuration) == 'Release'">
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
   </ItemGroup>
 </Project>

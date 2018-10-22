@@ -1,0 +1,1 @@
+﻿gci *.nupkg -Recurse | % { rm $_ }

@@ -1,6 +1,5 @@
 <Project>
-  <PropertyGroup>
-    <!-- Package Information -->
+  <PropertyGroup Label="GeneralInformation">
     <Authors>Im5tu</Authors>
     <Product>SignalOne.HealthChecks</Product>
     <RepositoryType>git</RepositoryType>
@@ -9,14 +8,21 @@
     <PackageIconUrl>https://raw.githubusercontent.com/SignalOneLtd/Assets/master/logo-inverse-square.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/SignalOneLtd/HealthChecks.ServiceBus</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/SignalOneLtd/HealthChecks.ServiceBus/master/LICENSE</PackageLicenseUrl>
+  </PropertyGroup>
 
-    <!-- Build Settings -->
+  <PropertyGroup Label="DefaultBuildSettings">
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <Deterministic>true</Deterministic>
     <LangVersion>latest</LangVersion>
     <Optimize Condition="$(Configuration) == 'Release'">true</Optimize>
+  </PropertyGroup>
 
-    <!-- Package Versions -->
+  <PropertyGroup Label="Dependencies">
     <AspNetCorePackageVersion>2.2.0-preview3-35359</AspNetCorePackageVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Label="StrongNaming">
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)build\SignalOne.HealthChecks.ServiceBus.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 </Project>

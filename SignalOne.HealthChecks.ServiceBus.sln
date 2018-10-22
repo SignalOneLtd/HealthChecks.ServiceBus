@@ -49,8 +49,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalOne.HealthChecks.Serv
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{27DEFA11-5F85-45DD-9362-55D7304EA5D1}"
 	ProjectSection(SolutionItems) = preProject
+		build\build-amazon.ps1 = build\build-amazon.ps1
+		build\build-azure.ps1 = build\build-azure.ps1
+		build\build-kafka.ps1 = build\build-kafka.ps1
+		build\build-rabbit.ps1 = build\build-rabbit.ps1
+		build\build-samples.ps1 = build\build-samples.ps1
 		build\build.ps1 = build\build.ps1
-		build\PackageSource.nuspec = build\PackageSource.nuspec
+		build\clear-oldpackages.ps1 = build\clear-oldpackages.ps1
+		build\Create-Public-Keys.ps1 = build\Create-Public-Keys.ps1
+		build\Extract-Public-Keys.ps1 = build\Extract-Public-Keys.ps1
+		build\functions.psm1 = build\functions.psm1
+		build\SignalOne.HealthChecks.ServiceBus.snk = build\SignalOne.HealthChecks.ServiceBus.snk
 	EndProjectSection
 EndProject
 Global
