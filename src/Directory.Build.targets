@@ -3,6 +3,10 @@
 
   <ItemGroup Label="DefaultPackageReferences">
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="$(AspNetCorePackageVersion)" />
+    <PackageReference Include="SignalOne.Automation.SourceLink.Github" Version="0.1.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
   
 </Project>

@@ -30,15 +30,4 @@
       <PackageReference Remove="@(PackageReference)" />
     </ItemGroup>
   </Target>
-  
-  <PropertyGroup Label="SourceLinkOnlyProperties" Condition="$(SourcesPackage) == '' AND $(Configuration) == 'Release'">
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType Condition="$(CollectCoverage) == 'false'">embedded</DebugType>
-  </PropertyGroup>
-  <ItemGroup Label="SourceLinkOnlyReferences" Condition="$(SourcesPackage) == '' AND $(Configuration) == 'Release'">
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
-  </ItemGroup>
 </Project>
