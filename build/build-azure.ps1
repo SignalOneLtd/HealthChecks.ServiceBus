@@ -10,4 +10,4 @@ else
 }
 
 Project-Build "SignalOne.HealthChecks.ServiceBus.Azure"
-Project-Package "SignalOne.HealthChecks.ServiceBus.Azure" "0.0.1"
+Project-Package "SignalOne.HealthChecks.ServiceBus.Azure" "1.0.10"

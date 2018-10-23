@@ -9,11 +9,12 @@
     )
 
     Push-Location ("{0}\{1}" -f $folderName, $projectName)
-    Write-Host "Building '$projectName' ($buildConfiguration)..." -ForegroundColor Green
 	try
 	{
-        . dotnet clean -c $buildConfiguration -v q
-		. dotnet build -c $buildConfiguration -v q /p:Version=$version /p:PackageVersion=$version
+        Write-Host "Cleaning '$projectName' ($buildConfiguration)..." -ForegroundColor Green
+        . dotnet clean -c $buildConfiguration -v q /nologo
+        Write-Host "Building '$projectName' ($buildConfiguration)..." -ForegroundColor Green
+		. dotnet build -c $buildConfiguration -v q /p:Version=$version /p:PackageVersion=$version /nologo
         errorCheck
 	}
 	finally
@@ -23,7 +24,7 @@
 
     if ($includeTests)
     {
-        Project-Test ("{0}.Tests" -f $projectName) -buildConfiguration $buildConfiguration
+        Project-Test ("{0}.Tests" -f $projectName) -buildConfiguration $buildConfiguration -prebuilt $true
     }
 }
 
@@ -32,14 +33,22 @@ function Project-Test {
     param(
         [Parameter(Mandatory=$true, Position=0)]
         [string] $projectName,
-        [string] $buildConfiguration = "Release"
+        [string] $buildConfiguration = "Release",
+        [bool]   $prebuilt = $false
     )
 
     Push-Location "tests\$projectName"
     Write-Host "Testing '$projectName' ($buildConfiguration)..." -Foreground Green
 	try
 	{
-		. dotnet test -v q -c $buildConfiguration
+        if($prebuilt)
+        {
+		    . dotnet test -v q --no-build -c $buildConfiguration /nologo
+        }
+        else
+        {
+		    . dotnet test -v q -c $buildConfiguration /nologo
+        }
         errorCheck
 	}
 	finally
@@ -58,12 +67,13 @@ function Project-Package {
     )
 
     Push-Location "src\$projectName"
-    Write-Host "Packaging '$projectName'..." -ForegroundColor Green
 	try
 	{
-	    . dotnet build -v q -c Release /p:GeneratePackage=true /p:SourcesPackage=true /p:Version=$version /p:PackageVersion=$version
+        Write-Host "Packaging '$projectName'..." -ForegroundColor Green
+	    . dotnet build -v q -c Release /p:GeneratePackage=true /p:SourcesPackage=true /p:Version=$version /p:PackageVersion=$version /nologo
         errorCheck
-	    . dotnet build -v q -c Release /p:GeneratePackage=true /p:Version=$version /p:PackageVersion=$version
+        Write-Host "Packaging '$projectName.Sources'..." -ForegroundColor Green
+	    . dotnet build -v q -c Release /p:GeneratePackage=true /p:Version=$version /p:PackageVersion=$version /nologo
         errorCheck
 
 	}
