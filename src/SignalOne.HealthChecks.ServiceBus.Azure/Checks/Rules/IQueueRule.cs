@@ -3,7 +3,10 @@ using SignalOne.HealthChecks.ServiceBus.Azure.Configuration;
 
 namespace SignalOne.HealthChecks.ServiceBus.Azure.Checks.Rules
 {
-    internal interface IQueueRule : IRule<IQueue, QueueHealthCheckOptions>
+    /// <summary>
+    /// A validation rule that is executed against a queue
+    /// </summary>
+    public interface IQueueRule : IRule<IQueue, QueueHealthCheckOptions>
     {
     }
 }

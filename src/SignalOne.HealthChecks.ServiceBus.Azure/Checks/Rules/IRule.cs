@@ -5,7 +5,10 @@ using System.Collections.Generic;
 
 namespace SignalOne.HealthChecks.ServiceBus.Azure.Checks.Rules
 {
-    internal interface IRule<in TResource, in TOptions>
+    /// <summary>
+    /// A validation rule that can be executed
+    /// </summary>
+    public interface IRule<in TResource, in TOptions>
                 where TResource : IResource, IIndexable, IHasId, IHasName
                 where TOptions : HealthCheckOptions, new()
     {

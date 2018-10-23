@@ -3,7 +3,10 @@ using SignalOne.HealthChecks.ServiceBus.Azure.Configuration;
 
 namespace SignalOne.HealthChecks.ServiceBus.Azure.Checks.Rules
 {
-    internal interface ITopicRule : IRule<ITopic, TopicHealthCheckOptions>
+    /// <summary>
+    /// A validation rule that is executed against a topic
+    /// </summary>
+    public interface ITopicRule : IRule<ITopic, TopicHealthCheckOptions>
     {
     }
 }
