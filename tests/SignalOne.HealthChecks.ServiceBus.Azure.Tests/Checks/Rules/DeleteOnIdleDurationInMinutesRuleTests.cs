@@ -93,34 +93,34 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Checks.Rules
             public void WhenRuleSupplied_AndNoValueSupplied_NoErrorsAreReturned()
             {
                 var target = new DeleteOnIdleDurationInMinutesRule();
-                var queue = new Mock<ITopic>();
+                var topic = new Mock<ITopic>();
 
-                target.ValidateResource(queue.Object, new TopicHealthCheckOptions()).Should().HaveCount(0);
+                target.ValidateResource(topic.Object, new TopicHealthCheckOptions()).Should().HaveCount(0);
             }
 
             [Fact]
             public void WhenRuleSupplied_AndValuesAreEqual_NoErrorsAreReturned()
             {
                 var target = new DeleteOnIdleDurationInMinutesRule();
-                var queue = new Mock<ITopic>();
+                var topic = new Mock<ITopic>();
                 var time = 1;
-                queue.Setup(x => x.DeleteOnIdleDurationInMinutes).Returns(() => time).Verifiable();
+                topic.Setup(x => x.DeleteOnIdleDurationInMinutes).Returns(() => time).Verifiable();
 
-                target.ValidateResource(queue.Object, new TopicHealthCheckOptions { DeleteOnIdleDurationInMinutes = time }).Should().HaveCount(0);
+                target.ValidateResource(topic.Object, new TopicHealthCheckOptions { DeleteOnIdleDurationInMinutes = time }).Should().HaveCount(0);
 
-                queue.Verify();
+                topic.Verify();
             }
 
             [Fact]
             public void WhenRuleSupplied_AndValuesAreNotEqual_SingleErrorReturned()
             {
                 var target = new DeleteOnIdleDurationInMinutesRule();
-                var queue = new Mock<ITopic>();
-                queue.Setup(x => x.DeleteOnIdleDurationInMinutes).Returns(() => 1).Verifiable();
+                var topic = new Mock<ITopic>();
+                topic.Setup(x => x.DeleteOnIdleDurationInMinutes).Returns(() => 1).Verifiable();
 
-                target.ValidateResource(queue.Object, new TopicHealthCheckOptions { DeleteOnIdleDurationInMinutes = 2 }).Should().HaveCount(1);
+                target.ValidateResource(topic.Object, new TopicHealthCheckOptions { DeleteOnIdleDurationInMinutes = 2 }).Should().HaveCount(1);
 
-                queue.Verify();
+                topic.Verify();
             }
         }
 
@@ -150,34 +150,34 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Checks.Rules
             public void WhenRuleSupplied_AndNoValueSupplied_NoErrorsAreReturned()
             {
                 var target = new DeleteOnIdleDurationInMinutesRule();
-                var queue = new Mock<ISubscription>();
+                var subscription = new Mock<ISubscription>();
 
-                target.ValidateResource(queue.Object, new SubscriptionHealthCheckOptions()).Should().HaveCount(0);
+                target.ValidateResource(subscription.Object, new SubscriptionHealthCheckOptions()).Should().HaveCount(0);
             }
 
             [Fact]
             public void WhenRuleSupplied_AndValuesAreEqual_NoErrorsAreReturned()
             {
                 var target = new DeleteOnIdleDurationInMinutesRule();
-                var queue = new Mock<ISubscription>();
+                var subscription = new Mock<ISubscription>();
                 var time = 1;
-                queue.Setup(x => x.DeleteOnIdleDurationInMinutes).Returns(() => time).Verifiable();
+                subscription.Setup(x => x.DeleteOnIdleDurationInMinutes).Returns(() => time).Verifiable();
 
-                target.ValidateResource(queue.Object, new SubscriptionHealthCheckOptions { DeleteOnIdleDurationInMinutes = time }).Should().HaveCount(0);
+                target.ValidateResource(subscription.Object, new SubscriptionHealthCheckOptions { DeleteOnIdleDurationInMinutes = time }).Should().HaveCount(0);
 
-                queue.Verify();
+                subscription.Verify();
             }
 
             [Fact]
             public void WhenRuleSupplied_AndValuesAreNotEqual_SingleErrorReturned()
             {
                 var target = new DeleteOnIdleDurationInMinutesRule();
-                var queue = new Mock<ISubscription>();
-                queue.Setup(x => x.DeleteOnIdleDurationInMinutes).Returns(() => 1).Verifiable();
+                var subscription = new Mock<ISubscription>();
+                subscription.Setup(x => x.DeleteOnIdleDurationInMinutes).Returns(() => 1).Verifiable();
 
-                target.ValidateResource(queue.Object, new SubscriptionHealthCheckOptions { DeleteOnIdleDurationInMinutes = 2 }).Should().HaveCount(1);
+                target.ValidateResource(subscription.Object, new SubscriptionHealthCheckOptions { DeleteOnIdleDurationInMinutes = 2 }).Should().HaveCount(1);
 
-                queue.Verify();
+                subscription.Verify();
             }
         }
     }

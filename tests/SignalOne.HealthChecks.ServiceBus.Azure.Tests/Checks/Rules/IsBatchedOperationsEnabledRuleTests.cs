@@ -8,14 +8,14 @@ using Xunit;
 
 namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Checks.Rules
 {
-    public class DefaultMessageTtlDurationRuleTests
+    public class IsBatchedOperationsEnabledRuleTests
     {
         public class WhenQueue
         {
             [Fact]
             public void WhenResourceIsNull_ThrowsArgumentNullException()
             {
-                var target = new DefaultMessageTtlDurationRule();
+                var target = new IsBatchedOperationsEnabledRule();
 
                 Action act = () => target.ValidateResource(default, new QueueHealthCheckOptions());
 
@@ -25,7 +25,7 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Checks.Rules
             [Fact]
             public void WhenOptionsIsNull_ThrowsArgumentNullException()
             {
-                var target = new DefaultMessageTtlDurationRule();
+                var target = new IsBatchedOperationsEnabledRule();
 
                 Action act = () => target.ValidateResource(new Mock<IQueue>().Object, default);
 
@@ -35,7 +35,7 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Checks.Rules
             [Fact]
             public void WhenRuleSupplied_AndNoValueSupplied_NoErrorsAreReturned()
             {
-                var target = new DefaultMessageTtlDurationRule();
+                var target = new IsBatchedOperationsEnabledRule();
                 var queue = new Mock<IQueue>();
 
                 target.ValidateResource(queue.Object, new QueueHealthCheckOptions()).Should().HaveCount(0);
@@ -44,12 +44,12 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Checks.Rules
             [Fact]
             public void WhenRuleSupplied_AndValuesAreEqual_NoErrorsAreReturned()
             {
-                var target = new DefaultMessageTtlDurationRule();
+                var target = new IsBatchedOperationsEnabledRule();
                 var queue = new Mock<IQueue>();
-                var time = TimeSpan.FromSeconds(1);
-                queue.Setup(x => x.DefaultMessageTtlDuration).Returns(() => time).Verifiable();
+                var enabled = true;
+                queue.Setup(x => x.IsBatchedOperationsEnabled).Returns(() => enabled).Verifiable();
 
-                target.ValidateResource(queue.Object, new QueueHealthCheckOptions { DefaultMessageTtlDuration = time }).Should().HaveCount(0);
+                target.ValidateResource(queue.Object, new QueueHealthCheckOptions { IsBatchedOperationsEnabled = enabled }).Should().HaveCount(0);
 
                 queue.Verify();
             }
@@ -57,11 +57,11 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Checks.Rules
             [Fact]
             public void WhenRuleSupplied_AndValuesAreNotEqual_SingleErrorReturned()
             {
-                var target = new DefaultMessageTtlDurationRule();
+                var target = new IsBatchedOperationsEnabledRule();
                 var queue = new Mock<IQueue>();
-                queue.Setup(x => x.DefaultMessageTtlDuration).Returns(() => TimeSpan.FromSeconds(1)).Verifiable();
+                queue.Setup(x => x.IsBatchedOperationsEnabled).Returns(() => true).Verifiable();
 
-                target.ValidateResource(queue.Object, new QueueHealthCheckOptions { DefaultMessageTtlDuration = TimeSpan.FromSeconds(2) }).Should().HaveCount(1);
+                target.ValidateResource(queue.Object, new QueueHealthCheckOptions { IsBatchedOperationsEnabled = false }).Should().HaveCount(1);
 
                 queue.Verify();
             }
@@ -72,7 +72,7 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Checks.Rules
             [Fact]
             public void WhenResourceIsNull_ThrowsArgumentNullException()
             {
-                var target = new DefaultMessageTtlDurationRule();
+                var target = new IsBatchedOperationsEnabledRule();
 
                 Action act = () => target.ValidateResource(default, new TopicHealthCheckOptions());
 
@@ -82,7 +82,7 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Checks.Rules
             [Fact]
             public void WhenOptionsIsNull_ThrowsArgumentNullException()
             {
-                var target = new DefaultMessageTtlDurationRule();
+                var target = new IsBatchedOperationsEnabledRule();
 
                 Action act = () => target.ValidateResource(new Mock<ITopic>().Object, default);
 
@@ -92,7 +92,7 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Checks.Rules
             [Fact]
             public void WhenRuleSupplied_AndNoValueSupplied_NoErrorsAreReturned()
             {
-                var target = new DefaultMessageTtlDurationRule();
+                var target = new IsBatchedOperationsEnabledRule();
                 var topic = new Mock<ITopic>();
 
                 target.ValidateResource(topic.Object, new TopicHealthCheckOptions()).Should().HaveCount(0);
@@ -101,12 +101,12 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Checks.Rules
             [Fact]
             public void WhenRuleSupplied_AndValuesAreEqual_NoErrorsAreReturned()
             {
-                var target = new DefaultMessageTtlDurationRule();
+                var target = new IsBatchedOperationsEnabledRule();
                 var topic = new Mock<ITopic>();
-                var time = TimeSpan.FromSeconds(1);
-                topic.Setup(x => x.DefaultMessageTtlDuration).Returns(() => time).Verifiable();
+                var enabled = true;
+                topic.Setup(x => x.IsBatchedOperationsEnabled).Returns(() => enabled).Verifiable();
 
-                target.ValidateResource(topic.Object, new TopicHealthCheckOptions { DefaultMessageTtlDuration = time }).Should().HaveCount(0);
+                target.ValidateResource(topic.Object, new TopicHealthCheckOptions { IsBatchedOperationsEnabled = enabled }).Should().HaveCount(0);
 
                 topic.Verify();
             }
@@ -114,11 +114,11 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Checks.Rules
             [Fact]
             public void WhenRuleSupplied_AndValuesAreNotEqual_SingleErrorReturned()
             {
-                var target = new DefaultMessageTtlDurationRule();
+                var target = new IsBatchedOperationsEnabledRule();
                 var topic = new Mock<ITopic>();
-                topic.Setup(x => x.DefaultMessageTtlDuration).Returns(() => TimeSpan.FromSeconds(1)).Verifiable();
+                topic.Setup(x => x.IsBatchedOperationsEnabled).Returns(() => true).Verifiable();
 
-                target.ValidateResource(topic.Object, new TopicHealthCheckOptions { DefaultMessageTtlDuration = TimeSpan.FromSeconds(2) }).Should().HaveCount(1);
+                target.ValidateResource(topic.Object, new TopicHealthCheckOptions { IsBatchedOperationsEnabled = false }).Should().HaveCount(1);
 
                 topic.Verify();
             }
@@ -129,7 +129,7 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Checks.Rules
             [Fact]
             public void WhenResourceIsNull_ThrowsArgumentNullException()
             {
-                var target = new DefaultMessageTtlDurationRule();
+                var target = new IsBatchedOperationsEnabledRule();
 
                 Action act = () => target.ValidateResource(default, new SubscriptionHealthCheckOptions());
 
@@ -139,7 +139,7 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Checks.Rules
             [Fact]
             public void WhenOptionsIsNull_ThrowsArgumentNullException()
             {
-                var target = new DefaultMessageTtlDurationRule();
+                var target = new IsBatchedOperationsEnabledRule();
 
                 Action act = () => target.ValidateResource(new Mock<ISubscription>().Object, default);
 
@@ -149,7 +149,7 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Checks.Rules
             [Fact]
             public void WhenRuleSupplied_AndNoValueSupplied_NoErrorsAreReturned()
             {
-                var target = new DefaultMessageTtlDurationRule();
+                var target = new IsBatchedOperationsEnabledRule();
                 var subscription = new Mock<ISubscription>();
 
                 target.ValidateResource(subscription.Object, new SubscriptionHealthCheckOptions()).Should().HaveCount(0);
@@ -158,12 +158,12 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Checks.Rules
             [Fact]
             public void WhenRuleSupplied_AndValuesAreEqual_NoErrorsAreReturned()
             {
-                var target = new DefaultMessageTtlDurationRule();
+                var target = new IsBatchedOperationsEnabledRule();
                 var subscription = new Mock<ISubscription>();
-                var time = TimeSpan.FromSeconds(1);
-                subscription.Setup(x => x.DefaultMessageTtlDuration).Returns(() => time).Verifiable();
+                var enabled = true;
+                subscription.Setup(x => x.IsBatchedOperationsEnabled).Returns(() => enabled).Verifiable();
 
-                target.ValidateResource(subscription.Object, new SubscriptionHealthCheckOptions { DefaultMessageTtlDuration = time }).Should().HaveCount(0);
+                target.ValidateResource(subscription.Object, new SubscriptionHealthCheckOptions { IsBatchedOperationsEnabled = enabled }).Should().HaveCount(0);
 
                 subscription.Verify();
             }
@@ -171,11 +171,11 @@ namespace SignalOne.HealthChecks.ServiceBus.Azure.Tests.Checks.Rules
             [Fact]
             public void WhenRuleSupplied_AndValuesAreNotEqual_SingleErrorReturned()
             {
-                var target = new DefaultMessageTtlDurationRule();
+                var target = new IsBatchedOperationsEnabledRule();
                 var subscription = new Mock<ISubscription>();
-                subscription.Setup(x => x.DefaultMessageTtlDuration).Returns(() => TimeSpan.FromSeconds(1)).Verifiable();
+                subscription.Setup(x => x.IsBatchedOperationsEnabled).Returns(() => true).Verifiable();
 
-                target.ValidateResource(subscription.Object, new SubscriptionHealthCheckOptions { DefaultMessageTtlDuration = TimeSpan.FromSeconds(2) }).Should().HaveCount(1);
+                target.ValidateResource(subscription.Object, new SubscriptionHealthCheckOptions { IsBatchedOperationsEnabled = false }).Should().HaveCount(1);
 
                 subscription.Verify();
             }
