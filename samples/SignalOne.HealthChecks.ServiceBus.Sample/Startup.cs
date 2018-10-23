@@ -27,7 +27,7 @@ namespace SignalOne.HealthChecks.ServiceBus.Sample
                         })
                         .AddAzureServiceBusQueueCheck("test-queue")
                         .AddAzureServiceBusTopicCheck("test-topic")
-                        .AddAzureServiceBusSubscriptionCheck("test-topic", "test-subscription");
+                        .AddAzureServiceBusSubscriptionCheck("test-topic", "test");
             services.AddMvc();
         }
 
