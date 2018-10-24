@@ -4,30 +4,9 @@
   <PropertyGroup Label="DefaultNugetPackageSettings">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsPackable Condition="$(Configuration) == 'Release'">true</IsPackable>
-    <GeneratePackageOnBuild Condition="$(IsPackable) == 'true' AND $(GeneratePackage) == 'true'">true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild Condition="$(IsPackable) == 'true' AND $(Package) == 'true'">true</GeneratePackageOnBuild>
     <PackageTags>SignalOne HealthChecks AspNetCore Diagnostics</PackageTags>
+    <SourcesPackage Condition="$(GeneratePackageOnBuild) == 'true' AND $(IsPackable) == 'true' AND $(Package) == 'true'">true</SourcesPackage>
   </PropertyGroup>
-
-  <PropertyGroup Label="SourcesOnlyProperties" Condition="$(SourcesPackage) == 'true'">
-    <Description>Sources package for $(MSBuildProjectName)</Description>
-    <PackageId>$(MSBuildProjectName).Sources</PackageId>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
-    <ContentTargetFolders>contentFiles</ContentTargetFolders>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
-    <NoWarn>CS2008;NU5104;NETSDK1057;</NoWarn>
-    <NoBuild>true</NoBuild>
-  </PropertyGroup>
-  <Target Label="SourcesOnlyTarget" Name="SourcesUpdate" BeforeTargets="BeforeBuild" Condition="$(SourcesPackage) == 'true'">
-    <ItemGroup>
-      <Content Include="@(Compile)" Exclude="AssemblyAttributes.cs">
-        <Pack>true</Pack>
-        <PackagePath>$(ContentTargetFolders)\cs\$(TargetFramework)\$(PackageId)\</PackagePath>
-        <BuildAction>Compile</BuildAction>
-      </Content>
-      <Compile Remove="@(Compile)" />
-      <EmbeddedResource Remove="@(EmbeddedResource)" />
-      <PackageReference Remove="@(PackageReference)" />
-    </ItemGroup>
-  </Target>
+  
 </Project>
