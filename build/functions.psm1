@@ -70,13 +70,9 @@ function Project-Package {
 	try
 	{
         Write-Host "Packaging '$projectName'..." -ForegroundColor Green
-	    . dotnet build -v q -c Release /p:GeneratePackage=true /p:SourcesPackage=true /p:Version=$version /p:PackageVersion=$version /nologo
+	    . dotnet build -v q -c Release /p:Package=true /p:Version=$version /p:PackageVersion=$version /nologo
         errorCheck
-        Write-Host "Packaging '$projectName.Sources'..." -ForegroundColor Green
-	    . dotnet build -v q -c Release /p:GeneratePackage=true /p:Version=$version /p:PackageVersion=$version /nologo
-        errorCheck
-
-	}
+ 	}
 	finally
 	{
 		Pop-Location
